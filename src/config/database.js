@@ -10,9 +10,9 @@ module.exports = {
     "dialect": process.env.DB_DIALECT,
     "logging": true,
     "define": {
+      "underscored":true,
+      "underscoredAll":true,
       "timestamps": true,
-      "underscored": true,
-      "underscoredAll": true,
       "createdAt": "created_at",
       "updatedAt": "updated_at"
     }
@@ -26,9 +26,9 @@ module.exports = {
     "dialect": 'mysql',
     "logging": true,
     "define": {
+      "underscored":true,
+      "underscoredAll":true,
       "timestamps": true,
-      "underscored": true,
-      "underscoredAll": true,
       "createdAt": "created_at",
       "updatedAt": "updated_at"
     }
@@ -42,9 +42,9 @@ module.exports = {
     "dialect": 'mysql',
     "logging": false,
     "define": {
+      "underscored":true,
+      "underscoredAll":true,
       "timestamps": true,
-      "underscored": true,
-      "underscoredAll": true,
       "createdAt": "created_at",
       "updatedAt": "updated_at"
     }

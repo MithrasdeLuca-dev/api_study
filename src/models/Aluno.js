@@ -26,13 +26,19 @@ module.exports = (sequelize, DataType) => {
             type: DataType.INTEGER,
             allowNull: false,
         },
-        data_nascimento:{
+        data_nascimento: {
             type: DataType.DATE,
             allowNull: false,
         }
     }, {
         tableName: 'alunos',
+    });
+    Aluno.associate = (models) =>{
+        Aluno.belongsToMany(models.Curso, {
+            foreignKey: 'aluno_id',
+            through: 'AlunoCurso',
+            as: 'Cursos'
+        })
     }
-    )
     return Aluno
 }
