@@ -1,6 +1,13 @@
-const { Curso, Aluno, CursoComprado } = require('../models');
+const { Curso } = require('../models');
 
 const cursoController = {
+    show: async (request, response) => {
+        const cursoAtivo = await Curso.findAll();
+
+        console.log(cursoAtivo)
+        return response.json(cursoAtivo)
+    },
+
     store: async (request, response) => {
         const { nome_curso, duracao, } = request.body;
 
@@ -11,16 +18,29 @@ const cursoController = {
         return response.json(curso);
     },
 
-    cursoComprado: async (request, response) => {
-        const  {idCurso, idAluno}  = request.body
 
-        const curso = await CursoComprado.create({
-            curso_id: idCurso,
-            aluno_id: idAluno
+    update: async (request, response) => {
+        const { idCurso } = request.params;
+        const { nome_curso, duracao, } = request.body;
+
+        await Curso.update({
+            nome_curso,
+            duracao
+        },
+            {
+                where: { id: idCurso }
+            }
+        );
+        return response.json('Curso atualizado');
+    },
+
+    delete: async (request, response) => {
+        const { idCurso } = request.params;
+
+        await Curso.destroy({
+            where: { id: idCurso }
         })
-
-        console.log(curso)
-        return response.send(curso)
+        return response.json('Curso deletado')
     }
 }
 

@@ -1,5 +1,4 @@
 module.exports = (sequelize, DataType) => {
-
     const Curso = sequelize.define('Curso', {
         id: {
             type: DataType.INTEGER,
@@ -17,6 +16,14 @@ module.exports = (sequelize, DataType) => {
         },
     }, {
         tableName: 'cursos'
-    });
+    },
+    );
+    Curso.associate = (models) =>{
+        Curso.belongsToMany(models.Aluno, {
+            foreignKey: 'curso_id',
+            through: 'AlunoCurso',
+            as: 'Alunos'
+        })
+    }
     return Curso
 }
