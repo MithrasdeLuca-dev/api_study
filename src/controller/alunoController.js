@@ -1,4 +1,5 @@
 const { Aluno } = require('../models');
+const bcrypt = require('bcryptjs');
 
 const alunoController = {
 
@@ -11,10 +12,10 @@ const alunoController = {
 
     store: async (request, response) => {
         const { nome_documento, senha, cpf, email, nome_social, data_nascimento } = request.body;
-
+        const passwordCriptografado = bcrypt.hash(senha, 10)
         const aluno = await Aluno.create({
             nome_documento,
-            senha,
+            senha:passwordCriptografado,
             cpf,
             email,
             nome_social,

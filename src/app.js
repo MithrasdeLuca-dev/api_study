@@ -1,5 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -7,6 +8,9 @@ const logger = require('morgan');
 const indexRouter = require('./routes/indexRouter');
 const alunoRouter = require('./routes/alunoRouter');
 const cursoRouter = require('./routes/cursoRouter');
+const perfilRouter = require('./routes/perfilRouter');
+const loginRouter = require('./routes/loginRouter');
+
 
 const app = express();
 
@@ -23,7 +27,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // routes engine setup
 app.use('/', indexRouter);
 app.use('/aluno', alunoRouter);
-app.use('/curso', cursoRouter)
+app.use('/curso', cursoRouter);
+app.use('/perfil', perfilRouter);
+app.use('/login', loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -19,5 +19,5 @@ const AlunoCursoController = {
         console.log(cursoComprar);
         return response.json(cursoComprar);
     }
-}
+};
 module.exports = AlunoCursoController;

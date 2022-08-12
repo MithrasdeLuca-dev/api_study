@@ -3,8 +3,6 @@ const router = express.Router();
 
 const alunoController = require('../controller/alunoController');
 
-/* GET users listing. */
-
 router.get('/perfil', alunoController.show);
 router.post('/create', alunoController.store);
 
