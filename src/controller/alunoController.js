@@ -12,15 +12,16 @@ const alunoController = {
 
     store: async (request, response) => {
         const { nome_documento, senha, cpf, email, nome_social, data_nascimento } = request.body;
-        const passwordCriptografado = bcrypt.hash(senha, 10)
+        const passwordCriptografado = bcrypt.hashSync(senha, 10);
+
         const aluno = await Aluno.create({
             nome_documento,
-            senha:passwordCriptografado,
+            senha: passwordCriptografado,
             cpf,
             email,
             nome_social,
             data_nascimento,
-        })
+        });
         return response.json(aluno);
     },
 
@@ -41,7 +42,7 @@ const alunoController = {
                 where: { id: idAluno }
             }
         );
-        return response.json('Dados atualizados')
+        return response.json('Dados atualizados');
     },
 
     delete: async (request, response) => {
@@ -51,8 +52,8 @@ const alunoController = {
             where: {
                 id: idAluno
             }
-        })
-        return response.json('Dados deletados')
+        });
+        return response.json('Dados deletados');
     }
 };
 module.exports = alunoController;
