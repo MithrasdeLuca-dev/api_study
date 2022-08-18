@@ -22,6 +22,5 @@ module.exports = (sequelize, DataType) => {
         tableName: 'cursos-comprados'
     }
     );
-    
     return AlunoCurso;
 }
