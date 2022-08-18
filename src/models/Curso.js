@@ -22,7 +22,7 @@ module.exports = (sequelize, DataType) => {
         Curso.belongsToMany(models.Aluno, {
             foreignKey: 'curso_id',
             through: 'AlunoCurso',
-            as: 'Alunos'
+            as: 'Aluno'
         })
     }
     return Curso

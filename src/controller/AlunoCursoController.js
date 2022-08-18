@@ -1,8 +1,8 @@
-const { AlunoCurso,Curso } = require('../models');
+const { AlunoCurso, Curso,Aluno } = require('../models');
 
 const AlunoCursoController = {
     show: async (request, response) => {
-        const cursoVendido = await Curso.findAll({ include: ['Alunos'] });
+        const cursoVendido = await AlunoCurso.findAll();
 
         console.log(cursoVendido);
         return response.json(cursoVendido);

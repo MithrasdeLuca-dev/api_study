@@ -12,7 +12,8 @@ const perfilController = {
             const aluno = await Aluno.findOne({
                 where: {
                     id
-                }
+                },
+                include:['Cursos']
             });
 
             return response.json(aluno);

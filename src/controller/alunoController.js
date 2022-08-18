@@ -27,12 +27,12 @@ const alunoController = {
 
     update: async (request, response) => {
         const { nome_documento, senha, cpf, email, nome_social, data_nascimento } = request.body;
-
+        const passwordCriptografado = bcrypt.hashSync(senha, 10);
         const { idAluno } = request.params;
 
         await Aluno.update({
             nome_documento,
-            senha,
+            senha:passwordCriptografado,
             cpf,
             email,
             nome_social,
