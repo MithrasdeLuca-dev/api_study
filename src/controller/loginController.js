@@ -1,5 +1,7 @@
+require('dotenv').config();
 const { Aluno } = require('../models');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const loginController = {
     logar: async (request, response) => {
@@ -17,11 +19,15 @@ const loginController = {
 
         if (!senhaAluno) { return response.send('email ou senha invalido') };
 
-        request.session.autorizado = true;
-        request.session.aluno = aluno;
+        const secret = process.env.SECRET;
 
-        return response.redirect('./perfil');
-    }
+        const token = jwt.sign(
+            { id: aluno.id }, secret,
+        );
+
+        return response.status(200).json({ msg: 'Autenticação autorizada com sucesso', token });
+    },
+    
 };
 
 module.exports = loginController;

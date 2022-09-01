@@ -2,22 +2,15 @@ const { Aluno, Curso, AlunoCursoComprado } = require('../models')
 
 const perfilController = {
     index: async (request, response) => {
-        const { id } = request.session.aluno;
+        const id = request.params.id;
 
-        if (!request.session.autorizado) {
+        const aluno = await Aluno.findBypk(id, '-senha');
 
-            return response.send('Você deve fazer o login');
-        } else {
-
-            const aluno = await Aluno.findOne({
-                where: {
-                    id
-                },
-                include:['Cursos']
-            });
-
-            return response.json(aluno);
+        if (!aluno) {
+            return response.status(404).json({ msg: 'Usuário não encontrado' });
         };
+
+        return response.status(200).json({aluno});
 
     }
 
