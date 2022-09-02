@@ -4,14 +4,13 @@ const perfilController = {
     index: async (request, response) => {
         const id = request.params.id;
 
-        const aluno = await Aluno.findBypk(id, '-senha');
+        const aluno = await Aluno.findByPk(id);
 
         if (!aluno) {
             return response.status(404).json({ msg: 'Usuário não encontrado' });
         };
 
-        return response.status(200).json({aluno});
-
+        return response.status(200).json({ aluno });
     }
 
 };
