@@ -15,6 +15,8 @@ const authMiddleware = {
             const secret = process.env.TOKEN_SECRET;
             
             await jwt.verify(token, secret);
+
+            request.user
             
             return next();
         } catch (error) {

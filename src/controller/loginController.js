@@ -7,7 +7,7 @@ const loginController = {
     logar: async (request, response) => {
         const { email, senha } = request.body;
 
-        const aluno = await Aluno.findOne({
+        const user = await User.findOne({
             where: {
                 email
             }
@@ -31,7 +31,7 @@ const loginController = {
         const expires = process.env.TOKEN_EXPIRATION;
 
         const token = jwt.sign(
-            { aluno: aluno.id }, secret, { expiresIn: expires }
+            { idUser: user.id, role: user.role }, secret, { expiresIn: expires }
         );
 
         return response.status(200).json({ msg: 'Autenticação autorizada com sucesso', token, expiresIn: expires });
