@@ -18,7 +18,7 @@ const authMiddleware = {
             
             return next();
         } catch (error) {
-            return response.status(400).json({ msg: "Token inválido" });
+            return response.status(400).json({ msg: "O tempo foi expirado, faça o login novamente" });
         };
     }
 };
