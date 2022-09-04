@@ -1,7 +1,7 @@
-require('dotenv').config();
 const { Aluno } = require('../models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const loginController = {
     logar: async (request, response) => {
@@ -17,7 +17,7 @@ const loginController = {
             return response.status(401).json({
                 errors: ['email ou senha invalido']
             });
-        }
+        };
 
         const senhaAluno = bcrypt.compareSync(senha, aluno.senha);
 
@@ -25,7 +25,7 @@ const loginController = {
             return response.status(401).json({
                 errors: ['email ou senha invalido']
             });
-        }
+        };
 
         const secret = process.env.TOKEN_SECRET;
         const expires = process.env.TOKEN_EXPIRATION;
