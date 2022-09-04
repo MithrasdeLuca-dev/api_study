@@ -64,6 +64,7 @@ const alunoController = {
 
     delete: async (request, response) => {
         const { idAluno } = request.params;
+        const {id} =  request.user
 
         await Aluno.destroy({
             where: {

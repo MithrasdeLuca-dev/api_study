@@ -1,5 +1,3 @@
-const Curso = require('./Curso');
-const Aluno = require('./Aluno');
 module.exports = (sequelize, DataType) => {
     const AlunoCurso = sequelize.define('AlunoCurso', {
         id: {
@@ -8,10 +6,11 @@ module.exports = (sequelize, DataType) => {
             autoIncrement: true,
             allowNull: false,
         },
-        curso_id: {
+        cursoId: {
             type: DataType.INTEGER,
             allowNull: false,
             foreignKey: true,
+            field: 'curso_id'
         },
         aluno_id: {
             type: DataType.INTEGER,
@@ -20,7 +19,7 @@ module.exports = (sequelize, DataType) => {
         },
     }, {
         tableName: 'cursos-comprados'
-    }
-    );
+    });
+    
     return AlunoCurso;
 }

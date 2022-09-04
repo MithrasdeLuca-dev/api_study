@@ -16,14 +16,15 @@ module.exports = (sequelize, DataType) => {
         },
     }, {
         tableName: 'cursos'
-    },
-    );
+    });
+
     Curso.associate = (models) =>{
         Curso.belongsToMany(models.Aluno, {
             foreignKey: 'curso_id',
             through: 'AlunoCurso',
             as: 'Aluno'
-        })
+        });
     }
+
     return Curso
 }
