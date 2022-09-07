@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('cursos-comprados', {
+  async up(queryInterface, Sequelize){
+    return await queryInterface.createTable('cursos-comprados', {
       id: {
         type: Sequelize.INTEGER.UNSIGNED,
         primaryKey: true,
@@ -42,7 +42,7 @@ module.exports = {
     });
   },
 
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('cursos-comprados');
+  async down (queryInterface, Sequelize){
+    return await queryInterface.dropTable('cursos-comprados');
   }
 };

@@ -2,14 +2,14 @@ const express = require('express');
 const router = express.Router();
 
 
-const alunoController = require('../controller/alunoController');
+const usuarioController = require('../controller/usuarioController');
 
-const alunoValidator = require('../validators/alunoValidators');
+const usuarioValidator = require('../validators/usuarioValidators');
 
-router.get('/', alunoController.show);
-router.post('/', alunoValidator.store, alunoController.store);
+router.get('/', usuarioController.show);
+router.post('/', usuarioValidator.store, usuarioController.store);
 
-router.put('/:idAluno', alunoController.update);
-router.delete('/:idAluno', alunoController.delete);
+router.put('/:idUsario', usuarioController.update);
+router.delete('/:idUsuario', usuarioController.delete);
 
 module.exports = router;

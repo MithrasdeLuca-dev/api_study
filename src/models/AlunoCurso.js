@@ -1,5 +1,3 @@
-const Curso = require('./Curso');
-const Aluno = require('./Aluno');
 module.exports = (sequelize, DataType) => {
     const AlunoCurso = sequelize.define('AlunoCurso', {
         id: {
@@ -13,8 +11,8 @@ module.exports = (sequelize, DataType) => {
             allowNull: false,
             foreignKey: true,
         },
-        aluno_id: {
-            type: DataType.INTEGER,
+        usuario_id: {
+            type: DataType.UUID,
             allowNull: false,
             foreignKey: true,
         },

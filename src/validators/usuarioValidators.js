@@ -1,6 +1,6 @@
 const {body} =  require('express-validator');
 
-const alunoValidator = {
+const usuarioValidator = {
     store:[
         body('nome_documento').notEmpty().withMessage('Deve preencher o nome de documento').bail(),
         body('nome_social').notEmpty().withMessage('Deve preencher o nome social').bail(),
@@ -8,8 +8,8 @@ const alunoValidator = {
         body('cpf').isNumeric({ min: 11 }).withMessage('Deve preencher o CPF com 11 dígitos').bail(),
         body('email').isEmail().withMessage('Deve preencher o email').bail(),
         body('data_nascimento').isDate().withMessage('Deve preencher a data de nascimento').bail(),
-        
+        body('tipo').notEmpty().withMessage('Deve preencher tipo').bail(),
     ]
 }
 
-module.exports = alunoValidator;
+module.exports = usuarioValidator;
