@@ -1,4 +1,4 @@
-const { Aluno } = require('../models');
+const { Usuario } = require('../models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -7,21 +7,21 @@ const loginController = {
     logar: async (request, response) => {
         const { email, senha } = request.body;
 
-        const aluno = await Aluno.findOne({
+        const usuario = await Usuario.findOne({
             where: {
                 email
             }
         });
 
-        if (!aluno) {
+        if (!usuario) {
             return response.status(401).json({
                 errors: ['email ou senha invalido']
             });
         };
 
-        const senhaAluno = bcrypt.compareSync(senha, aluno.senha);
+        const senhaUsuario = bcrypt.compareSync(senha, usuario.senha);
 
-        if (!senhaAluno) {
+        if (!senhaUsuario) {
             return response.status(401).json({
                 errors: ['email ou senha invalido']
             });
@@ -31,12 +31,11 @@ const loginController = {
         const expires = process.env.TOKEN_EXPIRATION;
 
         const token = jwt.sign(
-            { aluno: aluno.id }, secret, { expiresIn: expires }
+            { usuario: usuario.id, nome: usuario.nome_social, }, secret, { expiresIn: expires }
         );
 
         return response.status(200).json({ msg: 'Autenticação autorizada com sucesso', token, expiresIn: expires });
     },
-
 };
 
 module.exports = loginController;

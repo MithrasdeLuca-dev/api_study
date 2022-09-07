@@ -14,7 +14,7 @@ const AlunoCursoController = {
 
         const cursoComprar = await AlunoCurso.create({
             curso_id,
-            aluno_id
+            usuario_id:aluno_id
         })
         console.log(cursoComprar);
         return response.json(cursoComprar);

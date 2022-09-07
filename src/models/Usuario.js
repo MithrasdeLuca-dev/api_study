@@ -1,9 +1,9 @@
 module.exports = (sequelize, DataType) => {
-    const Aluno = sequelize.define('Aluno', {
+    const Usuario = sequelize.define('Usuario', {
         id: {
-            type: DataType.INTEGER,
+            type: DataType.UUID,
             primaryKey: true,
-            autoIncrement: true,
+            defaultValue: DataType.UUIDV4,
             allowNull: false
         },
         nome_documento: {
@@ -24,21 +24,25 @@ module.exports = (sequelize, DataType) => {
         },
         cpf: {
             type: DataType.INTEGER,
-            allowNull: false,
         },
         data_nascimento: {
             type: DataType.DATE,
             allowNull: false,
+        },
+        types: {
+            type: DataType.INTEGER,
+            allowNull: false
         }
     }, {
-        tableName: 'alunos',
-    });
-    Aluno.associate = (models) =>{
-        Aluno.belongsToMany(models.Curso, {
-            foreignKey: 'aluno_id',
+        tableName: 'usuarios'
+    },
+    );
+    Usuario.associate = (models) => {
+        Usuario.belongsToMany(models.Curso, {
+            foreignKey: 'usuario_id',
             through: 'AlunoCurso',
             as: 'Cursos'
         })
-    }
-    return Aluno
-}
+    };
+    return Usuario
+};
