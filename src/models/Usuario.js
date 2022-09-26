@@ -29,7 +29,7 @@ module.exports = (sequelize, DataType) => {
             type: DataType.DATE,
             allowNull: false,
         },
-        types: {
+        roles: {
             type: DataType.INTEGER,
             allowNull: false
         }

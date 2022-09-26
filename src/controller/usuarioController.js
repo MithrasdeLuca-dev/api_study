@@ -14,7 +14,7 @@ const usuarioController = {
     store: async (request, response) => {
         const listaErros = validationResult(request);
 
-        const { tipo, nome_documento, senha, cpf, email, nome_social, data_nascimento } = request.body;
+        const { cargo, nome_documento, senha, cpf, email, nome_social, data_nascimento } = request.body;
         const passwordCriptografado = bcrypt.hashSync(senha, 10);
 
         if (!listaErros.isEmpty()) {
@@ -38,7 +38,7 @@ const usuarioController = {
             email,
             nome_social,
             data_nascimento,
-            types:tipo
+            roles:cargo
         });
         return response.json(usuario);
     },

@@ -31,9 +31,9 @@ const loginController = {
         const expires = process.env.TOKEN_EXPIRATION;
 
         const token = jwt.sign(
-            { usuario: usuario.id, nome: usuario.nome_social, }, secret, { expiresIn: expires }
+            { Idusuario: usuario.id, nome: usuario.nome_social, }, secret, { expiresIn: expires }
         );
-
+            
         return response.status(200).json({ msg: 'Autenticação autorizada com sucesso', token, expiresIn: expires });
     },
 };
