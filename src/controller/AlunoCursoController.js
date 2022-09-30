@@ -9,12 +9,12 @@ const AlunoCursoController = {
     },
 
     store: async (request, response) => {
-        const { aluno_id } = request.params;
+        const { id } = request.usuario;
         const { curso_id } = request.body;
 
         const cursoComprar = await AlunoCurso.create({
             curso_id,
-            usuario_id:aluno_id
+            usuario_id:id
         })
         console.log(cursoComprar);
         return response.json(cursoComprar);
