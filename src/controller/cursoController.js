@@ -1,4 +1,4 @@
-const { Curso } = require('../models');
+const { Curso, AlunoCurso } = require('../models');
 
 const cursoController = {
 	show: async (request, response) => {
@@ -28,32 +28,39 @@ const cursoController = {
 		const { idCurso } = request.params;
 		const { nome_curso, duracao, } = request.body;
 
-		if (role == 'Professor' || 'Professora') {
-			await Curso.update({
-				nome_curso,
-				duracao
-			},
-			{
-				where: { id: idCurso }
-			}
-			);
-			return response.json('Curso atualizado');
+		if (role != 'Professor' || 'Professora') {
+			return response.json('Você não tem autorização para esta função');
 		}
-		return response.json('Você não tem autorização para esta função');
+		
+		await Curso.update({
+			nome_curso,
+			duracao
+		},
+		{
+			where: { id: idCurso }
+		}
+		);
+
+		return response.json('Curso atualizado');
 	},
 
 	delete: async (request, response) => {
 		const { idCurso } = request.params;
 		const { role } = request.usuario;
 
-		if (role == 'Professor' || 'Professora') {
-			await Curso.destroy({
-				where: { id: idCurso }
-			});
-			return response.json('Curso deletado');
+		if (role != 'Professor' || 'Professora') {
+			return response.json('Você não tem autorização para esta função');
 		}
 
-		return response.json('Você não tem autorização para esta função');
+		await Curso.destroy({
+			where: { id: idCurso }
+		});
+		
+		await AlunoCurso.destroy({
+			where: { curso_id: idCurso }
+		});
+		
+		return response.json('Curso deletado');
 	}
 };
 module.exports = cursoController;

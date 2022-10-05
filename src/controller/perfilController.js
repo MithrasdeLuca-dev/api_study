@@ -2,7 +2,7 @@ const { Usuario } = require('../models');
 
 const perfilController = {
 	index: async (request, response) => {
-		const id = request.params.id;
+		const {id} = request.params;
 
 		const usuario = await Usuario.findByPk(id, { include: ['Cursos'] });
 
