@@ -1,6 +1,7 @@
 const { Usuario, AlunoCurso } = require('../models');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const usuarioController = {
 
@@ -14,7 +15,7 @@ const usuarioController = {
     store: async (request, response) => {
         const listaErros = validationResult(request);
 
-        const { tipo, nome_documento, senha, cpf, email, nome_social, data_nascimento } = request.body;
+        const { cargo, nome_documento, senha, cpf, email, nome_social, data_nascimento } = request.body;
         const passwordCriptografado = bcrypt.hashSync(senha, 10);
 
         if (!listaErros.isEmpty()) {
@@ -38,7 +39,7 @@ const usuarioController = {
             email,
             nome_social,
             data_nascimento,
-            types:tipo
+            roles: cargo
         });
         return response.json(usuario);
     },
@@ -48,36 +49,60 @@ const usuarioController = {
         const passwordCriptografado = bcrypt.hashSync(senha, 10);
 
         const { idUsuario } = request.params;
+        const { id, role } = request.usuario;
 
-        await Usuario.update({
-            nome_documento,
-            senha: passwordCriptografado,
-            cpf,
-            email,
-            nome_social,
-            data_nascimento,
-        },
-            {
-                where: { id: idUsuario }
-            }
-        );
-        return response.json('Dados atualizados');
+        const usuario = await Usuario.findByPk(idUsuario);
+
+        if (usuario.id == id || role == "Administrador") {
+            await Usuario.update({
+                nome_documento,
+                senha: passwordCriptografado,
+                cpf,
+                email,
+                nome_social,
+                data_nascimento,
+            },
+                {
+                    where: { id: idUsuario }
+                }
+            )
+            return response.json('Dados atualizados');
+        };
+        return response.json('Você não tem autorização para esta função');
     },
 
     delete: async (request, response) => {
-        const { idUsuario } = request.params;
 
-        await Usuario.destroy({
-            where: {
-                id: idUsuario
-            }
-        });
-        await AlunoCurso.destroy({
-            where: {
-                aluno_id: idUsuario
-            }
-        });
-        return response.json('Dados deletados');
+        const { idUsuario } = request.params;
+        const { id, role } = request.usuario;
+
+        const usuario = await Usuario.findByPk(idUsuario);
+
+        if (usuario.id == id || role == "Administrador") {
+            const cursoUsuario = await AlunoCurso.findOne({
+                where: {
+                    usuario_id: idUsuario
+                }
+            });
+
+
+            if (cursoUsuario) {
+                await AlunoCurso.destroy({
+                    where: {
+                        usuario_id: idUsuario
+                    }
+                })
+            };
+            
+            if (usuario) {
+                await Usuario.destroy({
+                    where: {
+                        id: usuario
+                    }
+                });
+            };
+            return response.json('Dados deletados');
+        };
     }
 };
 module.exports = usuarioController;

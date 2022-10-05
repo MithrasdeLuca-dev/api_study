@@ -8,7 +8,7 @@ const usuarioValidator = {
         body('cpf').isNumeric({ min: 11 }).withMessage('Deve preencher o CPF com 11 dígitos').bail(),
         body('email').isEmail().withMessage('Deve preencher o email').bail(),
         body('data_nascimento').isDate().withMessage('Deve preencher a data de nascimento').bail(),
-        body('tipo').notEmpty().withMessage('Deve preencher tipo').bail(),
+        body('cargo').notEmpty().withMessage('Deve preencher tipo').bail(),
     ]
 }
 

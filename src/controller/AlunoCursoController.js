@@ -1,4 +1,4 @@
-const { AlunoCurso, Curso,Aluno } = require('../models');
+const { AlunoCurso, Curso, Aluno } = require('../models');
 
 const AlunoCursoController = {
     show: async (request, response) => {
@@ -9,15 +9,17 @@ const AlunoCursoController = {
     },
 
     store: async (request, response) => {
-        const { aluno_id } = request.params;
+        const { id, role } = request.usuario;
         const { curso_id } = request.body;
 
-        const cursoComprar = await AlunoCurso.create({
-            curso_id,
-            usuario_id:aluno_id
-        })
-        console.log(cursoComprar);
-        return response.json(cursoComprar);
+        if (role == "Aluno" || "Aluna") {
+            const cursoComprar = await AlunoCurso.create({
+                curso_id,
+                usuario_id: id
+            });
+            return response.json("Curso comprado com sucesso");
+        };
+        return response.json("Você não tem autorização para esta função");
     }
 };
 module.exports = AlunoCursoController;

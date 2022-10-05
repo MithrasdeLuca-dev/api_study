@@ -10,7 +10,7 @@ module.exports = {
 
       }),
       
-      await queryInterface.addColumn('usuarios', 'types', {
+      await queryInterface.addColumn('usuarios', 'roles', {
         type: Sequelize.STRING,
         allowNull: false
       })
@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.DataTypes.INTEGER
       }),
       
-      await queryInterface.removeColumn('usuarios', 'types'),
+      await queryInterface.removeColumn('usuarios', 'roles'),
     ]);
   }
 };

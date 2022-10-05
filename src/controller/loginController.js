@@ -30,8 +30,10 @@ const loginController = {
         const secret = process.env.TOKEN_SECRET;
         const expires = process.env.TOKEN_EXPIRATION;
 
+
+
         const token = jwt.sign(
-            { usuario: usuario.id, nome: usuario.nome_social, }, secret, { expiresIn: expires }
+            {idUsuario: usuario.id, nome: usuario.nome_social, role: usuario.roles }, secret, { expiresIn: expires }
         );
 
         return response.status(200).json({ msg: 'Autenticação autorizada com sucesso', token, expiresIn: expires });

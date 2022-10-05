@@ -14,7 +14,19 @@ module.exports = {
         senha: await bcrypt.hash('102030', 10),
         cpf: '12345678910',
         data_nascimento: '2015-08-15',
-        types: "Aluno",
+        roles: "Aluno",
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        id: uuid.v4(),
+        nome_documento: 'Rebeca',
+        nome_social: 'Beca',
+        email: 'beca@gmail.com',
+        senha: await bcrypt.hash('102030', 10),
+        cpf: '45695175365',
+        data_nascimento: '1975-08-15',
+        roles: "Administrador",
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -26,7 +38,7 @@ module.exports = {
         senha: await bcrypt.hash('102030', 10),
         cpf: '12345678910',
         data_nascimento: '2000-03-10',
-        types: "Aluno",
+        roles: "Aluno",
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -37,8 +49,8 @@ module.exports = {
         email: 'paulo@gmail.com',
         senha: await bcrypt.hash('102030', 10),
         cpf: '36925814710',
-        data_nascimento: '1998-03-17',
-        types: "Aluno",
+        data_nascimento: '1970-03-17',
+        roles: "Professor",
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -50,7 +62,7 @@ module.exports = {
         senha: await bcrypt.hash('102030', 10),
         cpf: '36925814710',
         data_nascimento: '1999-08-15',
-        types: "Aluna",
+        roles: "Aluna",
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -62,7 +74,7 @@ module.exports = {
         senha: await bcrypt.hash('102030', 10),
         cpf: '32165498701',
         data_nascimento: '2010-10-20',
-        types: "Aluna",
+        roles: "Aluna",
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -74,7 +86,7 @@ module.exports = {
         senha: await bcrypt.hash('102030', 10),
         cpf: '32165498701',
         data_nascimento: '1999-09-30',
-        types: "Aluna",
+        roles: "Aluna",
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -86,7 +98,7 @@ module.exports = {
         senha: await bcrypt.hash('102030', 10),
         cpf: '75695148635',
         data_nascimento: '1999-11-27',
-        types: "Aluna",
+        roles: "Aluna",
         created_at: new Date(),
         updated_at: new Date()
       },
@@ -97,8 +109,8 @@ module.exports = {
         email: 'sophia@gmail.com',
         senha: await bcrypt.hash('102030', 10),
         cpf: '35765485321',
-        data_nascimento: '1999-11-27',
-        types: "Aluna",
+        data_nascimento: '1980-11-27',
+        roles: "Professora",
         created_at: new Date(),
         updated_at: new Date()
       }
