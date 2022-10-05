@@ -1,30 +1,30 @@
 'use strict';
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    return Promise.all([
+	async up(queryInterface, Sequelize) {
+		return Promise.all([
 
-      await queryInterface.changeColumn('usuarios', 'id', {
-        type: Sequelize.DataTypes.UUID,
-        autoIncrement:false
+			await queryInterface.changeColumn('usuarios', 'id', {
+				type: Sequelize.DataTypes.UUID,
+				autoIncrement:false
 
-      }),
+			}),
       
-      await queryInterface.addColumn('usuarios', 'roles', {
-        type: Sequelize.STRING,
-        allowNull: false
-      })
-    ]);
-  },
+			await queryInterface.addColumn('usuarios', 'roles', {
+				type: Sequelize.STRING,
+				allowNull: false
+			})
+		]);
+	},
 
-  async down(queryInterface, Sequelize) {
-    return Promise.all([
+	async down(queryInterface, Sequelize) {
+		return Promise.all([
       
-      await queryInterface.changeColumn('usuarios', 'id', {
-        type: Sequelize.DataTypes.INTEGER
-      }),
+			await queryInterface.changeColumn('usuarios', 'id', {
+				type: Sequelize.DataTypes.INTEGER
+			}),
       
-      await queryInterface.removeColumn('usuarios', 'roles'),
-    ]);
-  }
+			await queryInterface.removeColumn('usuarios', 'roles'),
+		]);
+	}
 };
