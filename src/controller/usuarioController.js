@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 const usuarioController = {
 
-	show: async (response) => {
+	show: async (request, response) => {
 		const usuarioPerfil = await Usuario.findAll();
 
 		console.log(usuarioPerfil);
