@@ -1,11 +1,11 @@
 'use strict';
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.renameTable('alunos','usuarios')
-  },
+	async up (queryInterface) {
+		await queryInterface.renameTable('alunos','usuarios');
+	},
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.renameTable('usuarios','alunos')
-  }
+	async down (queryInterface) {
+		await queryInterface.renameTable('usuarios','alunos');
+	}
 };
