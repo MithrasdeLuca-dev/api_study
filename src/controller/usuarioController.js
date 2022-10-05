@@ -68,7 +68,7 @@ const usuarioController = {
             )
             return response.json('Dados atualizados');
         };
-        return response.json('Você não tem autorização para alterar os dados deste usuário');
+        return response.json('Você não tem autorização para esta função');
     },
 
     delete: async (request, response) => {
@@ -85,6 +85,7 @@ const usuarioController = {
                 }
             });
 
+
             if (cursoUsuario) {
                 await AlunoCurso.destroy({
                     where: {
@@ -92,15 +93,16 @@ const usuarioController = {
                     }
                 })
             };
-
-            await Usuario.destroy({
-                where: {
-                    id: idUsuario
-                }
-            });
-
+            
+            if (usuario) {
+                await Usuario.destroy({
+                    where: {
+                        id: usuario
+                    }
+                });
+            };
             return response.json('Dados deletados');
-        }
+        };
     }
 };
 module.exports = usuarioController;

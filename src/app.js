@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 
 const indexRouter = require('./routes/indexRouter');
-const alunoRouter = require('./routes/alunoRouter');
+const usuarioRouter = require('./routes/usuarioRouter');
 const cursoRouter = require('./routes/cursoRouter');
 const perfilRouter = require('./routes/perfilRouter');
 const loginRouter = require('./routes/loginRouter');
@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // routes engine setup
 app.use('/', indexRouter);
-app.use('/aluno', alunoRouter);
+app.use('/usuario', usuarioRouter);
 app.use('/curso', cursoRouter);
 app.use('/perfil', perfilRouter);
 app.use('/login', loginRouter);

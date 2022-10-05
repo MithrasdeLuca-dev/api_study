@@ -9,39 +9,51 @@ const cursoController = {
     },
 
     store: async (request, response) => {
+        const { role } = request.usuario;
         const { nome_curso, duracao, } = request.body;
 
-        const curso = await Curso.create({
-            nome_curso,
-            duracao
-        });
-        return response.json(curso);
+        if (role == "Professor" || "Professora") {
+            const curso = await Curso.create({
+                nome_curso,
+                duracao
+            });
+            return response.json("Curso cadastrado com sucesso");
+        }
+        return response.json("Você não tem autorização para esta função");
     },
 
 
     update: async (request, response) => {
+        const { role } = request.usuario;
         const { idCurso } = request.params;
         const { nome_curso, duracao, } = request.body;
 
-        await Curso.update({
-            nome_curso,
-            duracao
-        },
-            {
-                where: { id: idCurso }
-            }
-        );
-        return response.json('Curso atualizado');
+        if (role == "Professor" || "Professora") {
+            await Curso.update({
+                nome_curso,
+                duracao
+            },
+                {
+                    where: { id: idCurso }
+                }
+            );
+            return response.json('Curso atualizado');
+        };
+        return response.json("Você não tem autorização para esta função");
     },
 
     delete: async (request, response) => {
         const { idCurso } = request.params;
+        const { role } = request.usuario;
 
-        await Curso.destroy({
-            where: { id: idCurso }
-        })
-        return response.json('Curso deletado')
+        if (role == "Professor" || "Professora") {
+            await Curso.destroy({
+                where: { id: idCurso }
+            })
+            return response.json('Curso deletado');
+        };
+
+        return response.json("Você não tem autorização para esta função");
     }
-}
-
+};
 module.exports = cursoController;
