@@ -1,7 +1,7 @@
 const { AlunoCurso} = require('../models');
 
 const AlunoCursoController = {
-	show: async (request, response) => {
+	show: async (response) => {
 		const cursoVendido = await AlunoCurso.findAll();
 
 		console.log(cursoVendido);

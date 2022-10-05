@@ -9,7 +9,7 @@ const usuarioValidator = require('../validators/usuarioValidators');
 router.get('/', usuarioController.show);
 router.post('/', usuarioValidator.store, usuarioController.store);
 
-router.put('/:idUsuario', authMiddleware.auth, usuarioController.update);
+router.put('/:idUsuario', authMiddleware.auth,usuarioValidator.store, usuarioController.update);
 router.delete('/:idUsuario', authMiddleware.auth, usuarioController.delete);
 
 module.exports = router;

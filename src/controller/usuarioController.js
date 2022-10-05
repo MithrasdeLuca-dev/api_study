@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 const usuarioController = {
 
-	show: async (request, response) => {
+	show: async (response) => {
 		const usuarioPerfil = await Usuario.findAll();
 
 		console.log(usuarioPerfil);
@@ -44,13 +44,29 @@ const usuarioController = {
 	},
 
 	update: async (request, response) => {
-		const { nome_documento, senha, cpf, email, nome_social, data_nascimento } = request.body;
+		
+		const { cargo, nome_documento, senha, cpf, email, nome_social, data_nascimento } = request.body;
 		const passwordCriptografado = bcrypt.hashSync(senha, 10);
-
+		
 		const { idUsuario } = request.params;
 		const { id, role } = request.usuario;
+		
+		const listaErros = validationResult(request);
+		if (!listaErros.isEmpty()) {
+			return response.json(listaErros.errors);
+		}
 
+		const emailResult = await Usuario.findOne({
+			where: {
+				email
+			}
+		});
+		
 		const usuario = await Usuario.findByPk(idUsuario);
+
+		if (emailResult) {
+			return response.json({ msg: 'Esse email já foi cadastrado' });
+		}
 
 		if (usuario.id == id || role == 'Administrador') {
 			await Usuario.update({
@@ -60,6 +76,7 @@ const usuarioController = {
 				email,
 				nome_social,
 				data_nascimento,
+				roles:cargo
 			},
 			{
 				where: { id: idUsuario }
