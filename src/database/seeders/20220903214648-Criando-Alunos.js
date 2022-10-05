@@ -80,8 +80,8 @@ module.exports = {
 			},
 			{
 				id: uuid.v4(),
-				nome_documento: 'Jack Pig',
-				nome_social: 'Morzão Mor',
+				nome_documento: 'Jackeline ',
+				nome_social: 'Jack',
 				email: 'jackeline.morais@gmail.com',
 				senha: await bcrypt.hash('102030', 10),
 				cpf: '32165498701',
