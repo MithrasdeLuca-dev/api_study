@@ -33,11 +33,15 @@ const loginController = {
 
 
 		const token = jwt.sign(
-			{idUsuario: usuario.id, nome: usuario.nome_social, role: usuario.roles }, secret, { expiresIn: expires }
+			{ idUsuario: usuario.id, nome: usuario.nome_social, role: usuario.roles }, secret, { expiresIn: expires }
 		);
 
-		return response.status(200).json({ msg: 'Autenticação autorizada com sucesso', token, expiresIn: expires });
+		return response.status(200).json({ msg: 'Olá ' + usuario.nome_social + ' autenticação autorizada com sucesso', token, expiresIn: expires });
 	},
+
+	logout: async (request, response) => {
+    
+	}
 };
 
 module.exports = loginController;

@@ -10,6 +10,6 @@ router.get('/', usuarioController.show);
 router.post('/', usuarioValidator.store, usuarioController.store);
 
 router.put('/:idUsuario', authMiddleware.auth,usuarioValidator.store, usuarioController.update);
-router.delete('/:idUsuario', authMiddleware.auth, usuarioController.delete);
+router.delete('/:idUsuario/:deleteUsuario', authMiddleware.auth, usuarioController.delete);
 
 module.exports = router;

@@ -4,6 +4,8 @@ const perfilController = {
 	index: async (request, response) => {
 		const {id} = request.params;
 
+		console.log(id)
+		
 		const usuario = await Usuario.findByPk(id, { include: ['Cursos'] });
 
 		if (!usuario) {

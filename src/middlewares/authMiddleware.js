@@ -12,9 +12,10 @@ const authMiddleware = {
 		}
 
 		try {
+
 			const secret = process.env.TOKEN_SECRET;
 
-			const userAuthenticate = await jwt.verify(token, secret);
+			const userAuthenticate = jwt.verify(token, secret);
 
 			const { idUsuario, role } = userAuthenticate;
 
@@ -23,6 +24,7 @@ const authMiddleware = {
 			return next();
 		} catch (error) {
 			return response.status(400).json({ msg: 'O tempo foi expirado, faça o login novamente' });
+
 		}
 	}
 };

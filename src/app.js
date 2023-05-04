@@ -20,19 +20,19 @@ app.use('/perfil', perfilRouter);
 app.use('/login', loginRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(function (next) {
 	next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (error, request, response, next) {
 	// set locals, only providing error in development
-	res.locals.message = err.message;
-	res.locals.error = req.app.get('env') === 'development' ? err : {};
+	response.locals.message = error.message;
+	response.locals.error = request.app.get('env') === 'development' ? error : {};
 
 	// render the error page
-	res.status(err.status || 500);
-	res.render('error');
+	response.status(error.status || 500);
+	response.json('error');
 });
 
 app.listen(3006, () => {
