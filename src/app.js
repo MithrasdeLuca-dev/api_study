@@ -35,9 +35,7 @@ app.use(function (error, request, response, next) {
 	response.json('error');
 });
 
-app.listen(3006, () => {
-	console.log('teste');
-});
+app.listen(3006, () => console.log('Example app listening on port 3006!'));
 
 
 module.exports = app;

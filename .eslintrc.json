@@ -15,10 +15,11 @@
             "error",
             "tab"
         ],
-        "linebreak-style": [
+        "linebreak-style":[
             "error",
-            "linux"
+            "unix"
         ],
+
         "quotes": [
             "error",
             "single"
