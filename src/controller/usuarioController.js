@@ -78,9 +78,9 @@ const usuarioController = {
 				data_nascimento,
 				roles: cargo
 			},
-				{
-					where: { id: idUsuario }
-				}
+			{
+				where: { id: idUsuario }
+			}
 			);
 			return response.json('Dados atualizados');
 		}
@@ -96,9 +96,9 @@ const usuarioController = {
 
 		if (usuario.id == id && role == 'Administrador') {
 
-			const verifyUsuario = await Usuario.findByPk(deleteUsuario)
+			const verifyUsuario = await Usuario.findByPk(deleteUsuario);
 
-			if (!verifyUsuario) { return response.json('Usuário não encontrado') }
+			if (!verifyUsuario) { return response.json('Usuário não encontrado'); }
 
 			const cursoUsuario = await AlunoCurso.findOne({
 				where: {
